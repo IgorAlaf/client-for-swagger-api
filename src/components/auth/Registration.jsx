@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { fetchRegistration } from '../../store/AsyncFunctions'
 
 const Registration = () => {
@@ -11,6 +11,7 @@ const Registration = () => {
 	const [city, setCity] = useState('')
 	const [error, setError] = useState('')
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const handleSubmit = async e => {
 		e.preventDefault()
 		if ((email, password, firstName, lastName, city)) {
