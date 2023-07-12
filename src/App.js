@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react'
+import Main from './components/main/Main'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCheckAuth } from './store/AsyncFunctions'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const { isAuth } = useSelector(store => store.userReducer)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	useEffect(() => {
+		async function check() {
+			if (!localStorage.getItem('user_id')) {
+				navigate('/auth/registration')
+			}
+			if (localStorage.getItem('token')) {
+				await dispatch(fetchCheckAuth())
+			}
+		}
+		check()
+	}, [])
+	return (
+		<div className='App'>
+			<Main />
+		</div>
+	)
 }
 
-export default App;
+export default App
