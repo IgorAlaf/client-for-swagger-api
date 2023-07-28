@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { fetchCheckAuth, fetchEditUser } from '../../store/AsyncFunctions'
-
+import './Profile.css'
 const Profile = () => {
 	const navigate = useNavigate()
 	const emailRef = useRef()
@@ -53,150 +53,167 @@ const Profile = () => {
 		} catch (e) {}
 	}
 	return (
-		<div className='mt-10 p-10 rounded-sm bg-[#ddd8ff] flex items-start justify-between md:flex-col md:items-center md:gap-y-10'>
-			<form onSubmit={e => e.preventDefault()} id='form1'>
-				<div>
-					<h3 className='font-medium text-lg'>Email</h3>
-					<div className='flex gap-4 items-center mt-2 mb-2'>
-						<input
-							ref={emailRef}
-							readOnly={true}
-							type='text'
-							placeholder='email'
-							onBlur={() => (emailRef.current.readOnly = true)}
-							value={email}
-							onChange={e => setEmail(e.target.value)}
-							className='bg-transparent border-gray-400 px-5 rounded-sm py-[2px] outline-none border-solid border xs:px-2'
-						/>
-						<button
-							onClick={e => {
-								emailRef.current.focus()
-								emailRef.current.readOnly = false
-							}}
-							type='button'
-							className='bg-[#a89dfd] text-white py-1 px-4 rounded-sm transition-colors duration-300 hover:bg-[#9587fe] '
-						>
-							edit
-						</button>
+		<div className=' wrapper-profile mt-[109px] p-10 px-[78px] lg:px-[30px] rounded-sm flex flex-col md:flex-col md:items-center md:gap-y-10'>
+			<h1 className='text-[64px] font-semibold tr:text-[45px]'>Profile</h1>
+			<div className='flex items-start justify-between md:flex-col-reverse md:gap-y-8'>
+				<div className='flex'>
+					<div className='mt-7'>
+						<div className='flex flex-col  mt-2 '>
+							<h3 className='font-semibold text-[16px]'>Password</h3>
+							<input
+								type='password'
+								placeholder='Enter your pass'
+								value={password}
+								onChange={e => setPassword(e.target.value)}
+								form='form1'
+								className='xs:w-[180px] bg-transparent mt-[13px] border-[#353535] px-2 rounded-sm w-[228px] md:w-[268px] hr:w-[228px] py-[1px] outline-none border-solid border placeholder:text-[#474747]'
+							/>
+							<h3 className='font-semibold text-[15px] mt-[20px]'>
+								New Password
+							</h3>
+							<input
+								type='password'
+								placeholder='Enter new pass'
+								form='form1'
+								value={newPass}
+								onChange={e => setNewPass(e.target.value)}
+								className='xs:w-[180px] bg-transparent mt-[13px] border-[#353535] px-2 w-[228px] md:w-[268px] hr:w-[228px] rounded-sm py-[1px] outline-none border-solid border placeholder:text-[#474747]'
+							/>
+							<p
+								className='text-[#151CC4] text-[13px] mt-[13px] hover:text-[#0D15E7] transition-colors duration-300 cursor-pointer'
+								style={{ maxWidth: '170px' }}
+							>
+								if you don't want to change your password, leave this{' '}
+								<span className='text-blue-700'>fields empty</span>
+							</p>
+							<button
+								onClick={handleSubmit}
+								className='bg-[#E06CFD] rounded-[20px] text-white py-1 px-3 mt-[40px] shadow-lg hover:bg-[#D33BFA] transition-colors duration-300'
+							>
+								Send changes
+							</button>
+						</div>
 					</div>
 				</div>
-
-				<div>
-					<h3 className='font-medium text-lg'>First name</h3>
-					<div className='flex gap-4 items-center mt-2 mb-2'>
-						<input
-							ref={firstNameRef}
-							type='text'
-							placeholder='first name'
-							onBlur={() => (firstNameRef.current.readOnly = true)}
-							readOnly
-							value={firstName}
-							onChange={e => setFirstName(e.target.value)}
-							className='bg-transparent border-gray-400 px-5 rounded-sm py-[2px] outline-none border-solid border xs:px-2'
-						/>
-						<button
-							onClick={e => {
-								firstNameRef.current.focus()
-								firstNameRef.current.readOnly = false
-							}}
-							type='button'
-							className='bg-[#a89dfd] text-white py-1 px-4 rounded-sm transition-colors duration-300 hover:bg-[#9587fe] '
-						>
-							edit
-						</button>
-					</div>
-				</div>
-				<div>
-					<h3 className='font-medium text-lg'>Last name</h3>
-					<div className='flex gap-4 items-center mt-2 mb-2'>
-						<input
-							ref={lastNameRef}
-							type='text'
-							onBlur={() => (lastNameRef.current.readOnly = true)}
-							readOnly
-							placeholder='last name'
-							value={lastName}
-							onChange={e => setLastName(e.target.value)}
-							className='bg-transparent border-gray-400 px-5 rounded-sm py-[2px] outline-none border-solid border xs:px-2'
-						/>
-						<button
-							onClick={e => {
-								lastNameRef.current.focus()
-								lastNameRef.current.readOnly = false
-							}}
-							type='button'
-							className='bg-[#a89dfd] text-white py-1 px-4 rounded-sm transition-colors duration-300 hover:bg-[#9587fe] '
-						>
-							edit
-						</button>
-					</div>
-				</div>
-
-				<div>
-					<h3 className='font-medium text-lg'>City</h3>
-					<div className='flex gap-4 items-center mt-2 '>
-						<input
-							ref={cityRef}
-							type='text'
-							onBlur={() => (cityRef.current.readOnly = true)}
-							readOnly
-							placeholder='city'
-							value={city}
-							onChange={e => setCity(e.target.value)}
-							className='bg-transparent border-gray-400 px-5 rounded-sm py-[2px] outline-none border-solid border xs:px-2'
-						/>
-						<button
-							type='button'
-							onClick={e => {
-								cityRef.current.focus()
-								cityRef.current.readOnly = false
-							}}
-							className='bg-[#a89dfd] text-white py-1 px-4 rounded-sm transition-colors duration-300 hover:bg-[#9587fe] '
-						>
-							edit
-						</button>
-					</div>
-				</div>
-				{errors && <p className='text-red-600 absolute text-sm '>{errors}</p>}
-				{success && (
-					<p className='text-green-500 text-sm absolute'>{success}</p>
-				)}
-				<button
-					type='submit'
-					onClick={handleSubmit}
-					className='bg-[#8453d1] text-white py-1 px-3 mt-5'
+				<form
+					onSubmit={e => e.preventDefault()}
+					id='form1'
+					className='mt-7 tr:mt-4'
 				>
-					Send changes
-				</button>
-			</form>
-			<div>
-				<h1 className='text-5xl font-semibold'>Profile</h1>
-				<div className='mt-7'>
-					<div className='flex gap-4 flex-col mt-2 '>
-						<h3 className='font-medium text-lg'>Password</h3>
-						<input
-							type='password'
-							placeholder='password'
-							value={password}
-							onChange={e => setPassword(e.target.value)}
-							form='form1'
-							className='bg-transparent border-gray-400 px-5 rounded-sm py-[2px] outline-none border-solid border'
-						/>
-						<h3 className='font-medium text-lg'>New Password</h3>
-						<input
-							type='password'
-							placeholder='new password'
-							form='form1'
-							value={newPass}
-							onChange={e => setNewPass(e.target.value)}
-							className='bg-transparent border-gray-400 px-5 rounded-sm py-[2px] outline-none border-solid border'
-						/>
-						<p className='text-blue-500' style={{ maxWidth: '200px' }}>
-							if you don't want to change your password, leave this{' '}
-							<span className='text-blue-700'>fields empty</span>
-						</p>
+					<div>
+						<h3 className='text-[15px] font-semibold'>Email</h3>
+						<div className='flex gap-4 items-center mt-[13px] mb-[20px]'>
+							<input
+								ref={emailRef}
+								readOnly={true}
+								type='text'
+								placeholder='email'
+								onBlur={() => (emailRef.current.readOnly = true)}
+								value={email}
+								onChange={e => setEmail(e.target.value)}
+								className='xs:w-[180px] hr:w-[228px] bg-transparent w-[268px] border-[#353535] px-2 rounded-sm py-[1px] outline-none border-solid border xs:px-2'
+							/>
+							<button
+								onClick={e => {
+									emailRef.current.focus()
+									emailRef.current.readOnly = false
+								}}
+								type='button'
+								className='bg-[#806CFD] text-white py-[2px] px-4 rounded-sm  hover:bg-[#4E32FB] transition-colors duration-300'
+							>
+								edit
+							</button>
+						</div>
 					</div>
-				</div>
+
+					<div>
+						<h3 className='text-[15px] font-semibold'>First name</h3>
+						<div className='flex gap-4 items-center mt-[13px] mb-[20px]'>
+							<input
+								ref={firstNameRef}
+								type='text'
+								placeholder='first name'
+								onBlur={() => (firstNameRef.current.readOnly = true)}
+								readOnly
+								value={firstName}
+								onChange={e => setFirstName(e.target.value)}
+								className='xs:w-[180px] hr:w-[228px] bg-transparent w-[268px] border-[#353535] px-2 rounded-sm py-[1px] outline-none border-solid border xs:px-2'
+							/>
+							<button
+								onClick={e => {
+									firstNameRef.current.focus()
+									firstNameRef.current.readOnly = false
+								}}
+								type='button'
+								className='bg-[#806CFD] text-white py-[2px] px-4 rounded-sm  hover:bg-[#4E32FB] transition-colors duration-300'
+							>
+								edit
+							</button>
+						</div>
+					</div>
+					<div>
+						<h3 className='text-[15px] font-semibold'>Last name</h3>
+						<div className='flex gap-4 items-center mt-[13px] mb-[20px]'>
+							<input
+								ref={lastNameRef}
+								type='text'
+								onBlur={() => (lastNameRef.current.readOnly = true)}
+								readOnly
+								placeholder='last name'
+								value={lastName}
+								onChange={e => setLastName(e.target.value)}
+								className='xs:w-[180px] hr:w-[228px] bg-transparent w-[268px] border-[#353535] px-2 rounded-sm py-[1px] outline-none border-solid border xs:px-2'
+							/>
+							<button
+								onClick={e => {
+									lastNameRef.current.focus()
+									lastNameRef.current.readOnly = false
+								}}
+								type='button'
+								className='bg-[#806CFD] hover:bg-[#4E32FB] transition-colors duration-300 text-white py-[2px] px-4 rounded-sm '
+							>
+								edit
+							</button>
+						</div>
+					</div>
+
+					<div>
+						<h3 className='text-[15px] font-semibold'>City</h3>
+						<div className='flex gap-4 items-center mt-[13px]'>
+							<input
+								ref={cityRef}
+								type='text'
+								onBlur={() => (cityRef.current.readOnly = true)}
+								readOnly
+								placeholder='city'
+								value={city}
+								onChange={e => setCity(e.target.value)}
+								className='xs:w-[180px] hr:w-[228px] bg-transparent w-[268px] border-[#353535] px-2 rounded-sm py-[1px] outline-none border-solid border xs:px-2'
+							/>
+							<button
+								type='button'
+								onClick={e => {
+									cityRef.current.focus()
+									cityRef.current.readOnly = false
+								}}
+								className='bg-[#806CFD] hover:bg-[#4E32FB] transition-colors duration-300 text-white py-[2px] px-4 rounded-sm'
+							>
+								edit
+							</button>
+						</div>
+					</div>
+					{errors && <p className='text-red-600 absolute text-sm '>{errors}</p>}
+					{success && (
+						<p className='text-green-700 text-sm absolute'>{success}</p>
+					)}
+					<button
+						type='submit'
+						onClick={handleSubmit}
+						className='xs:px-[40px] bg-[#806CFD] hover:bg-[#4E32FB] transition-colors duration-300 text-white py-[3px] mt-[37px] rounded-[20px] px-[66px]'
+					>
+						Send changes
+					</button>
+				</form>
 			</div>
 		</div>
 	)

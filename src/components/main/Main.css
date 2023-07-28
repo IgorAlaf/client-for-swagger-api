@@ -1,0 +1,12 @@
+.text-auth::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 74px;
+	background-image: url('../../assets/images/cloud-2.png');
+	background-position: center;
+	background-size: cover;
+	z-index: -1;
+	width: 100%;
+	min-height: 510px;
+}

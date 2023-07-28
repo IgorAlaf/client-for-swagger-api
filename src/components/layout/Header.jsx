@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchLogout } from '../../store/AsyncFunctions'
-
+import './Header.css'
 const Header = () => {
 	const { isAuth } = useSelector(store => store.userReducer)
 	const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const Header = () => {
 				<ul className='flex gap-3 xs:gap-2'>
 					<li>
 						<Link
-							className='hover:text-[#E7E4FD] sm:hidden hover:bg-black py-1 px-2 rounded-sm transition-color duration-300'
+							className='hover:text-[#E7E4FD] text-[20px] sm:hidden hover:bg-black py-1 px-2 rounded-sm transition-color duration-300'
 							to={'/'}
 						>
 							Product
@@ -28,7 +28,7 @@ const Header = () => {
 					</li>
 					<li>
 						<Link
-							className='hover:text-[#E7E4FD] sm:hidden hover:bg-black py-1 px-2 rounded-sm transition-color duration-300'
+							className='hover:text-[#E7E4FD] text-[20px]  sm:hidden hover:bg-black py-1 px-2 rounded-sm transition-color duration-300'
 							to={'/'}
 						>
 							Resources
@@ -36,7 +36,7 @@ const Header = () => {
 					</li>
 					<li>
 						<Link
-							className='hover:text-[#E7E4FD] sm:hidden hover:bg-black py-1 px-2 rounded-sm transition-color duration-300'
+							className='hover:text-[#E7E4FD] text-[20px] sm:hidden hover:bg-black py-1 px-2 rounded-sm transition-color duration-300'
 							to={'/'}
 						>
 							About
@@ -44,12 +44,12 @@ const Header = () => {
 					</li>
 					<li>
 						{!isAuth ? (
-							<Link className='cursor-not-allowed  py-1 px-2 sm:text-lg'>
+							<Link className='cursor-not-allowed  py-1 px-2 sm:text-lg text-[20px]'>
 								Profile
 							</Link>
 						) : (
 							<Link
-								className='hover:text-[#E7E4FD] sm:text-lg hover:bg-black py-1 px-2 rounded-sm transition-color duration-300'
+								className='hover:text-[#E7E4FD] sm:text-lg hover:bg-black py-1 px-2 rounded-sm transition-color duration-300 text-[20px]'
 								to={'/profile'}
 							>
 								Profile
@@ -67,7 +67,7 @@ const Header = () => {
 						Log in
 					</Link>
 					<Link
-						className='text-sm text-white font-medium tr:px-2 bg-[#010103] py-[5px] px-6 transition-color duration-300 rounded-sm hover:bg-[#232329]'
+						className='text-sm text-white font-medium rounded-[20px] tr:px-2 bg-[#010103] py-[6px] px-[12px] transition-color duration-300 hover:bg-[#232329]'
 						to={'/auth/registration'}
 					>
 						Sign up
@@ -75,7 +75,7 @@ const Header = () => {
 				</div>
 			) : (
 				<button
-					className='py-1 px-3 bg-purple-700 text-white mr-3 sm:mr-0'
+					className='header-button rounded-[20px] bg-tl text-[13px] font-semibold py-[5px] px-[12px] bg-purple-700 text-white sm:mr-0'
 					type='button'
 					onClick={handleLogout}
 				>

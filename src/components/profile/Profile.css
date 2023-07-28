@@ -1,0 +1,27 @@
+.wrapper-profile {
+	border-radius: 18px;
+	background: rgba(129, 155, 170, 0.47);
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	position: relative;
+	overflow: hidden;
+	min-height: 485px;
+}
+
+.wrapper-profile::after {
+	content: '';
+	background-image: url('../../assets/images/cloud-2.png');
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+@media (max-width: 375px) {
+	.wrapper-profile {
+		border-radius: 10px;
+	}
+}
